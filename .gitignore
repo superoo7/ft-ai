@@ -2,3 +2,4 @@ node_modules
 dist
 .env
 messages.json
+src/config.ts

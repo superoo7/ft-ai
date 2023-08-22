@@ -25,6 +25,10 @@ git clone https://github.com/electron/electron-quick-start-typescript
 cd electron-quick-start-typescript
 # Install dependencies
 npm install
+# Setup your OPENAI API Key and your FT Profile
+mv .env.sample .env
+mv src/config.sample.ts src/config.ts
+
 # Run the app
 npm start
 ```

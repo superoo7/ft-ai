@@ -5,6 +5,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
 import * as fs from "fs";
 import axios from "axios";
+import { INITIAL_FT_LINK, OWNER_NAME, PERSONA_PROMPT } from "./config";
 
 async function createWindow() {
   // Create the browser window.
@@ -22,11 +23,7 @@ async function createWindow() {
     userAgent:
       "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1 standalone",
   };
-  // await mainWindow.loadURL("https://www.friend.tech", opt);
-  await mainWindow.loadURL(
-    "https://www.friend.tech/rooms/0x9793d62bdfb6a170cd68df9a19cbf021b8fd7d43",
-    opt
-  );
+  await mainWindow.loadURL(INITIAL_FT_LINK, opt);
 
   // Open the DevTools.
   await mainWindow.webContents.openDevTools({
@@ -81,7 +78,7 @@ ipcMain.on("messages", async (event, args, isLatest) => {
     if (oldLatestMessage.message === latestMessage.message) return;
 
     console.log(`[CHATGPT] ${latestMessage.name}: ${latestMessage.message}`);
-    if (latestMessage.name === "superoo7 | Hooga 🍌") {
+    if (latestMessage.name === OWNER_NAME) {
       fs.writeFileSync("messages.json", JSON.stringify(messages));
       return;
     }
@@ -101,9 +98,7 @@ Format the response as JSON like following:
       );
     } else {
       const replyMessage = await askGpt(
-        `Based on user's message, please reply in all caps and super excited.
-              
-Reply answer in 1 sentence.`,
+        PERSONA_PROMPT,
         `${latestMessage.name}: ${latestMessage.message}}`
       );
       const isReplySpamMessage = await askGpt(
