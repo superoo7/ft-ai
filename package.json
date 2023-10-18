@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
-    "@types/lodash": "^4.14.197",
+    "@types/lodash": "^4.14.200",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "electron": "^24.3.0",
